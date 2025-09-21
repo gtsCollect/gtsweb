@@ -8,6 +8,8 @@
 </head>
 <body>
     <h2>小说</h2>
+    <p>加密的文章需要使用 <a href="https://www.sojson.com/encrypt.html#google_vignette">这个网站</a>解密（复制文章内容搞进去，再复制密钥进行解密）这是为了防审查</p>
+    <p>注：一间昏暗的密室内 一名巨大的魔族少女双腿敞开 这篇小说需要使用解密查看 (1),加密方法（AES）密钥S6Cs5vU3TAJdPG5c6yD4</p>
     <ol>
     <?php
     $lis = gen_novel_list("小说");
