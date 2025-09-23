@@ -1,0 +1,161 @@
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+
+   body {
+       font-family: 'Microsoft YaHei', Arial, sans-serif;
+       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+       min-height: 100vh;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       padding: 20px;
+   }
+
+   h1 {
+       color: white;
+       margin-bottom: 20px;
+       text-align: center;
+       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+       font-size: 2.5rem;
+   }
+
+   .comic-container {
+       width: 90%;
+       max-width: 1200px;
+       height: 70vh;
+       background: rgba(255, 255, 255, 0.95);
+       border-radius: 15px;
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+       overflow: hidden;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-bottom: 30px;
+       padding: 20px;
+   }
+
+   #comic-img {
+       max-width: 100%;
+       max-height: 100%;
+       object-fit: contain;
+       border-radius: 8px;
+       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+   }
+
+   .control-panel {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       gap: 20px;
+       background: rgba(255, 255, 255, 0.9);
+       padding: 20px 40px;
+       border-radius: 50px;
+       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+   }
+
+   button {
+       background: linear-gradient(45deg, #667eea, #764ba2);
+       color: white;
+       border: none;
+       padding: 12px 25px;
+       font-size: 16px;
+       border-radius: 25px;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   }
+
+   button:hover {
+       transform: translateY(-3px);
+       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+       background: linear-gradient(45deg, #764ba2, #667eea);
+   }
+
+   button:active {
+       transform: translateY(1px);
+   }
+
+   #page-select {
+       padding: 10px 20px;
+       font-size: 16px;
+       border: 2px solid #667eea;
+       border-radius: 25px;
+       background: white;
+       color: #333;
+       outline: none;
+       cursor: pointer;
+       text-align: center;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
+
+   #page-select:focus {
+       border-color: #764ba2;
+       box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.3);
+   }
+
+   /* 响应式设计 */
+   @media (max-width: 768px) {
+       h1 {
+           font-size: 2rem;
+       }
+
+       .comic-container {
+           height: 60vh;
+           padding: 10px;
+       }
+
+       .control-panel {
+           flex-direction: column;
+           border-radius: 20px;
+           padding: 20px;
+       }
+
+       button {
+           padding: 10px 20px;
+           font-size: 14px;
+       }
+
+       #page-select {
+           padding: 8px 15px;
+           font-size: 14px;
+       }
+   }
+
+   @media (max-width: 480px) {
+       h1 {
+           font-size: 1.5rem;
+       }
+
+       .comic-container {
+           height: 50vh;
+           width: 95%;
+       }
+
+       .control-panel {
+           gap: 10px;
+           padding: 15px;
+       }
+   }
+
+   /* 针对720*1280px屏幕的特殊处理 */
+   @media (min-width: 720px) and (max-width: 768px) {
+       .control-panel {
+           flex-direction: row !important;
+       }
+
+       body {
+           padding: 15px;
+       }
+
+       h1 {
+           font-size: 2rem;
+           margin-bottom: 15px;
+       }
+
+       .comic-container {
+           height: 65vh;
+       }
+   }

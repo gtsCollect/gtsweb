@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>短篇-理解巨大化的她</title>
+    <link rel="stylesheet" href="../../../css/comic.css">
+</head>
+<body>
+    <h1>短篇-理解巨大化的她</h1>
+    <div class="comic-container">
+        <img id="comic-img" src="" alt="漫画页面">
+    </div>
+    <div class="control-panel">
+        <button onclick="page_up()">上一页</button>
+        <select id="page-select"></select>
+        <button onclick="page_down()">下一页</button>
+    </div>
+    <script src="../../../js/comic.js"></script>
+    <script>
+        var a = []
+        for (let i = 1; i < 25+1; i++) {
+            a.push(i + ".jpg")
+        }
+        init_images(a)
+        init()
+    </script>
+</body>
+</html>
