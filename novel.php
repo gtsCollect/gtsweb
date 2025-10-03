@@ -18,6 +18,7 @@
     }
     ?>
     <li><a href="小说/爱转校的千雪大小姐/index.php">爱转校的千雪大小姐</a></li>
+    <li><a href="小说/mc/index.php">mc</a></li>
     </ol>
     <h2>UnnamedAdventures.exe解包剧情代码</h2>
     <ol>
