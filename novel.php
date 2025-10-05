@@ -17,6 +17,7 @@
         echo "<li><a href='" . htmlspecialchars($lis[$i]) . "'>" . htmlspecialchars(urldecode(basename($lis[$i]))) . "</a></li>";
     }
     ?>
+    <li><a href="小说/娜娜变大记/index.php">娜娜变大记-番茄小说</a></li>
     <li><a href="小说/爱转校的千雪大小姐/index.php">爱转校的千雪大小姐</a></li>
     <li><a href="小说/mc/index.php">mc</a></li>
     </ol>
