@@ -93,7 +93,7 @@
                     else{
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
                         $encodedFile = rawurlencode($file);
-                        $encodedPath = $encodedDir . '/' . $encodedFile . '/index.php';
+                        $encodedPath = $encodedDir . '/' . $encodedFile;
                         
                         // 输出HTML列表项
                         echo "<li><a href='" . htmlspecialchars($encodedPath) . "'>" . htmlspecialchars($file) . "</a></li>";
