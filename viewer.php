@@ -5,6 +5,7 @@ if (!isset($_GET['novel']) || empty($_GET['novel'])) {
 }
 
 $novelName = $_GET['novel'];
+$writer = $_GET['writer'];
 $novelDir = "小说/" . $novelName;
 
 // 安全检查，防止路径遍历攻击
@@ -17,7 +18,7 @@ $files = array();
 if (is_dir($novelDir)) {
     $dirContents = scandir($novelDir);
     foreach ($dirContents as $item) {
-        if ($item === '.' || $item === '..') continue;
+        if ($item === '.' || $item === '..' || $item === "info.json") continue;
         
         $itemPath = $novelDir . '/' . $item;
         if (is_file($itemPath)) {
@@ -99,7 +100,12 @@ if (is_dir($novelDir)) {
 </head>
 <body>
     <div class="header">
-        <h1><?php echo htmlspecialchars($novelName); ?> - 文件列表</h1>
+        <h1><?php echo htmlspecialchars($novelName); ?> - 文件列表 - 作者- <?php 
+        if(isset($writer))
+        {
+            echo htmlspecialchars($writer);
+        }
+        ?></h1>
     </div>
     
     <a href="novel.php" class="back-link">&laquo; 返回小说列表</a>

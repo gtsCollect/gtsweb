@@ -40,7 +40,17 @@
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
                         $encodedFile = rawurlencode($file);
                         // 指向统一的小说查看器，传递小说名称参数
-                        $viewerPath = 'viewer.php?novel=' . $encodedFile;
+                        $infoFile = $filePath . "/info.json";
+                        if(is_file($infoFile))
+                        {
+                            $json = file_get_contents($infoFile);
+                            $infoData = json_decode($json,true);
+                            $writer = $infoData['writer'];
+                            $viewerPath = 'viewer.php?novel=' . $encodedFile . '&writer=' . rawurlencode($writer) ;
+                        }
+                        else{
+                            $viewerPath = 'viewer.php?novel=' . $encodedFile;
+                        }
                         // 输出HTML列表项
                         echo "<li><a href='" . htmlspecialchars($viewerPath) . "'>" . htmlspecialchars($file) . "</a></li>";
                     }
