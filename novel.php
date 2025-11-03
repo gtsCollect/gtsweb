@@ -12,16 +12,9 @@
     <p>注：一间昏暗的密室内 一名巨大的魔族少女双腿敞开 这篇小说需要使用解密查看 (1),加密方法（AES）密钥S6Cs5vU3TAJdPG5c6yD4</p>
     <ol>
     <?php
-    /*$lis = gen_novel_list("小说");
-    for($i = 0; $i < count($lis); $i++) {
-        echo "<li><a href='" . htmlspecialchars($lis[$i]) . "'>" . htmlspecialchars(urldecode(basename($lis[$i]))) . "</a></li>";
-    }*/
     // 使用gen_novel_list2函数生成小说列表
     gen_novel_list_2("小说");
     ?>
-    <!-- <li><a href="小说/娜娜变大记/index.php">娜娜变大记-番茄小说</a></li>
-    <li><a href="小说/爱转校的千雪大小姐/index.php">爱转校的千雪大小姐</a></li>
-    <li><a href="小说/mc/index.php">mc</a></li> -->
     </ol>
     <h2>UnnamedAdventures.exe解包剧情代码</h2>
     <ol>
@@ -30,34 +23,6 @@
         <li><a href="data/UnnamedAdventures/akane_background.rpy">akane_background.rpy</a></li>
     </ol>
     <?php
-    function gen_novel_list($dir)
-    {   
-        $result = array(); // 创建结果数组
-        
-        if (is_dir($dir)) {
-            $files = scandir($dir);
-            
-            if ($files !== false) {
-                foreach ($files as $file) {
-                    if ($file === '.' || $file === '..') continue; 
-                    
-                    $filePath = $dir . '/' . $file;
-                    
-                    if (is_file($filePath)) {
-                        // 处理中文路径编码
-                        $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
-                        $encodedFile = rawurlencode($file);
-                        $encodedPath = $encodedDir . '/' . $encodedFile;
-                        
-                        // 将路径添加到结果数组而不是直接输出
-                        $result[] = $encodedPath;
-                    }
-                }
-            }
-        }
-        
-        return $result; // 返回数组
-    }
     // 一个遍历小说文件夹每个文件夹下的所有文件的函数
     function gen_novel_list_2($dir)
     {
@@ -78,17 +43,6 @@
                         $viewerPath = 'viewer.php?novel=' . $encodedFile;
                         // 输出HTML列表项
                         echo "<li><a href='" . htmlspecialchars($viewerPath) . "'>" . htmlspecialchars($file) . "</a></li>";
-                        /*$indexFile = $filePath . '/index.php';
-                        
-                        if (is_file($indexFile)) {
-                            // 处理中文路径编码
-                            $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
-                            $encodedFile = rawurlencode($file);
-                            $encodedPath = $encodedDir . '/' . $encodedFile . '/index.php';
-                            
-                            // 输出HTML列表项
-                            echo "<li><a href='" . htmlspecialchars($encodedPath) . "'>" . htmlspecialchars($file) . "</a></li>";
-                        }*/
                     }
                     else{
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
