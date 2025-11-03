@@ -1,0 +1,123 @@
+<?php
+// viewer.php - 小说目录文件列表查看器
+if (!isset($_GET['novel']) || empty($_GET['novel'])) {
+    die('无效的小说名称');
+}
+
+$novelName = $_GET['novel'];
+$novelDir = "小说/" . $novelName;
+
+// 安全检查，防止路径遍历攻击
+if (!is_dir($novelDir) || strpos($novelName, '..') !== false || strpos($novelName, '/') !== false) {
+    die('小说不存在');
+}
+
+// 获取小说目录下的所有文件
+$files = array();
+if (is_dir($novelDir)) {
+    $dirContents = scandir($novelDir);
+    foreach ($dirContents as $item) {
+        if ($item === '.' || $item === '..') continue;
+        
+        $itemPath = $novelDir . '/' . $item;
+        if (is_file($itemPath)) {
+            $files[] = array(
+                'name' => $item,
+                'path' => $item
+            );
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($novelName); ?> - 文件列表</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .novel-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007cba;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .file-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .file-list a {
+            color: #007cba;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .file-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><?php echo htmlspecialchars($novelName); ?> - 文件列表</h1>
+    </div>
+    
+    <a href="novel.php" class="back-link">&laquo; 返回小说列表</a>
+    
+    <div class="novel-content">
+        <?php if (!empty($files)): ?>
+            <ul class="file-list">
+                <?php foreach ($files as $file): ?>
+                    <li>
+                        <a href="<?php echo htmlspecialchars("小说/" . rawurlencode($novelName) . "/" . rawurlencode($file['path'])); ?>">
+                            <?php echo htmlspecialchars($file['name']); ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>该小说目录下暂无文件。</p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>
