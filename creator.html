@@ -56,10 +56,19 @@
         <li><a href="">yasu</a></li>
         <li><a href="">BG3D</a></li>
         <li><a href="">slice of size（头像是一个蓝色的动漫女）</a></li>
+        <li><a href="https://www.patreon.com/gxize">gxize</a></li>
+        <!-- <li><a class="patreon" href=""></a></li> -->
     </ol>
     <h2>视频作者</h2>
     <ol>
         <li><a href="https://space.bilibili.com/6462003">雄峰bebe</a></li>
     </ol>
+    <script>
+        var patreon = document.getElementsByClassName("patreon");
+        for(var i = 0; i < patreon.length; i++)
+        {
+            patreon[i].href = "https://www.patreon.com/" + patreon[i].href
+        }
+    </script>
 </body>
 </html>
