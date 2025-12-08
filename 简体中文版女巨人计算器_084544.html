@@ -1,0 +1,330 @@
+
+<!-- saved from url=(0041)https://giantessnight.com/tools/gtscc.htm -->
+<html class="translated-ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="zh-cn">
+<title>简体中文版女巨人计算器</title>
+<style type="text/css">
+	._th-container ._th-item
+	{
+		margin-bottom:3px;position:relative;width:30px;height:30px;cursor:pointer;opacity:.3;background-color:aquamarine;border-radius:100%;text-align:center;line-height:30px;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;right:30px
+	}
+	._th-container ._th-item._item-x2
+	{
+		margin-left:18px;width:40px;height:40px;line-height:40px
+	}
+	._th-container ._th-item._item-x-2
+	{
+		margin-left:17px;width:38px;height:38px;line-height:38px
+	}
+	._th-container ._th-item._item-x4
+	{
+		width:36px;height:36px;margin-left:16px;line-height:36px
+	}
+	._th-container ._th-item._item-x-4
+	{
+		width:32px;height:32px;line-height:32px;margin-left:14px
+	}
+	._th-container ._th-item._item-reset
+	{
+		width:30px;line-height:30px;height:30px;margin-left:10px
+	}
+	._th-click-hover
+	{
+		position:relative;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;height:50px;width:50px;cursor:pointer;opacity:.3;border-radius:100%;background-color:aquamarine;text-align:center;line-height:50px;right:0
+	}
+	._th-container:hover
+	{
+		left:-10px
+	}
+	._th-container
+	{
+		font-size:12px;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;left:-40px;top:20%;position:fixed;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:100000
+	}
+	._th-container ._th-item:hover
+	{
+		opacity:.8;background-color:#5fb492;color:aliceblue
+	}
+	._th-container:hover
+	._th-click-hover
+	{
+		opacity:.8
+	}
+	._th-container:hover
+	._th-item
+	{
+		opacity:.6;right:0
+	}
+	._th-container ._th-click-hover:
+	{
+		opacity:.8;background-color:#5fb492;color:aliceblue
+	}
+	._th_cover-all-show-times
+	{
+		position:fixed;top:0;right:0;width:100%;height:100%;z-index:99999;opacity:1;font-weight:900;font-size:30px;color:#4f4f4f;background-color:rgba(0,0,0,0.1)
+	}
+	._th_cover-all-show-times._th_hidden
+	{
+		z-index:-1;opacity:0;-webkit-transition:1s all;-o-transition:1s all;transition:1s all
+	}
+	._th_cover-all-show-times ._th_times
+	{
+		width:80px;height:80px;border-radius:80px;background-color:rgba(127,255,212,0.51);text-align:center;line-height:80px;position:absolute;top:50%;right:50%;margin-top:-40px;margin-right:-40px
+	}
+  p.ex1
+  {
+  	margin:12 120; line-height: 200%; font-weight:bold;vertical-align: inherit; text-align: center;
+  }
+
+	</style>
+</head>
+
+<body text="#FFFFFF" bgcolor="#000000">
+
+<!-- geoguide start -->
+
+<script type="text/javascript">
+<!-- hide script from old browsers
+
+function convert(form, wmncm,  breast, key1, key2, key3, wmnweight, gtsfactor, gtslift)
+{
+  factor    =gtsfactor
+  factor68  =find_m(wmncm)/(68)
+  factor120 =wmnweight/120
+
+  form.gts_m.value              =round2(gtsfactor*find_m(wmncm))
+       
+  form.manfeet.value            =round2(165/factor)
+  form.manpounds.value          =(55/Math.pow(factor,3))*1000
+
+  form.gtstons.value            =findtons(wmnweight*Math.pow(factor,3))
+  form.gtslifttons.value        =findtons(gtslift*Math.pow(factor,3))
+
+  form.bustfeet.value           =find_m(key1*Math.pow(factor,1))
+  form.waistfeet.value          =find_m(key2*Math.pow(factor,1))
+  form.hipsfeet.value           =find_m(key3*Math.pow(factor,1))
+
+  form.anklefeet.value          =round2(factor68*4*factor)
+
+  form.kneefeet.value           =round2(factor68*19*factor)
+
+  form.crotchfeet.value         =round2(factor68*33*factor)
+
+  form.hipfeet.value            =round2(factor68*36*factor)
+
+  form.breastfeet.value         =round2(factor68*49*factor)
+
+  form.neckfeet.value           =round2(factor68*56*factor)
+
+
+  form.footwidthfeet.value      =round2(factor68*2.7*factor)
+
+  form.footlengthfeet.value     =round2(factor68*8*factor)
+  form.handwidthfeet.value      =round2(factor68*3*factor)
+  form.handlengthfeet.value     =round2(factor68*6.5*factor)
+  form.armlengthfeet.value      =round2(factor68*22*factor)
+  form.vaginalengthfeet.value   =round2(factor68*6*factor)
+
+  form.breastheightfeet.value   =round2(find_m(breast*1+1)*factor)
+  form.breastwidthfeet.value    =round2(find_m(breast*1+2)*factor)
+  form.breastdepthfeet.value    =round2(find_m(breast*factor))
+  form.breastweighttons.value   =findtons(breast*Math.pow(factor,3))
+}
+
+function round2(meter)
+{
+  return(Math.round(meter*10)/10)
+}
+
+function find_m(cm){
+
+	return cm/100
+}
+function findfeet(incches)
+{
+  return(-1)
+}
+
+function findinches(inches)
+{
+  return(-1)
+}
+
+function findtons(kg)
+{
+  return(kg/1000)
+}
+
+function findpounds(weight)
+{
+  return(Math.floor(weight%2000))
+}
+
+// end hide -->
+</script>
+</p><strong>
+<br>
+<br>
+<br>
+<div align="center">
+  <p style="margin-left: 40; margin-right: 40; vertical-align: inherit; font-size: 2em; font-family: '宋体'; color:#ffff00;">
+   简体中文版女巨人计算器(JS) v1.2
+  </p>
+</div>
+</strong>
+<div align="center">
+ <p style="margin-left: 40; margin-right: 40; color:#4d4d4d; font-size:0.7em; vertical-align: inherit;">
+	(updated 2021.1）
+ </p>
+</div>
+<form name="gtsconverter">
+  <p class="ex1">
+  原本身高:<input name="wmncm" value="133" type="text" style="width:75px">厘米
+  </p>
+  <p class="ex1">
+  罩杯尺寸
+  <select name="breast">
+  <option value="1" selected="selected">A</option>
+  <option value="2">B</option>
+  <option value="3">C</option>
+  <option value="4">D</option>
+  <option value="5">DD</option>
+  <option value="6">E</option>
+  </select>
+  <br>
+  三围： B:<input name="key1" value="62" type="text" style="width:75px"> W:<input name="key2" value="50.8" type="text" style="width:75px"> 
+  H:<input name="key3" value="67" type="text" style="width:75px">  （单位请用厘米）<br>
+  原本体重：<input name="wmnweight" value="28" type="text" style="width:75px">公斤<br>
+  想巨大化几倍？：<input name="gtsfactor" value="100" type="text" style="width:75px">倍！<br>
+  巨大化前手上持有多重的物体？：<input name="gtslift" value="1.4" type="text" style="width:75px">公斤
+  
+  <input name="convertbutton" value="巨大化!" onclick="convert(this.form,
+
+                          this.form.wmncm.value,
+                          this.form.breast.options[this.form.breast.selectedIndex].value,
+                          this.form.key1.value,
+                          this.form.key2.value,
+                          this.form.key3.value,
+                          this.form.wmnweight.value,
+                          this.form.gtsfactor.value,
+                          this.form.gtslift.value)" type="button">
+  </p>
+  <table border="1" align="center" >
+    <tbody>
+    	<tr>
+      <td width="475" style="padding-left: 50px;">
+      <p style="margin:3 40; line-height: 150%;">
+      	<p style="font-weight:bold;">
+      	与人类相比：
+      	</p>
+      巨大化后的少女所见到的人（165厘米、55千克），将是<br>
+      <input name="manfeet" size="5" type="text"> 厘米、<input name="manpounds" size="5" type="text"> 克的大小。
+      <br>
+      </p>
+      </td>
+      <td width="475" style="padding-left: 50px;">
+      <p style="margin:3 40; line-height: 150%; ">
+      <p style="text-decoration:underline;">若以色色的事情举例，对于巨大少女来说，人的相对大小</p>
+      <strong>60厘米以下</strong>，则手脚四肢可勉强塞入<br>
+      <strong>45厘米以下</strong>，则整个头部可以进去<br>
+      <strong>30厘米以下</strong>，则大约能滑入一半身体<br>
+      <strong>15厘米以下</strong>，人可以刚好塞满<br>
+      <strong>低于5厘米</strong>就跟喝水一样轻松了，整个人都会掉进去。
+      <p><i>※不知道我在讲什么的人，恭喜你很纯洁～～</i></p></p></td>
+      <br>
+    </tr>
+    <tr>
+      <td style="padding-left: 50px;">
+      <p style="line-height: 200%; margin-top: 4; margin-bottom: 6; margin-left:40; margin-right:40">
+      <p style="font-weight:bold">巨大化后的少女：</p>
+      身高：<input name="gts_m" size="5" type="text">米
+      <br>
+      体重：<input name="gtstons" size="5" type="text">吨
+      <br>
+      原本手中持有的东西变成<input name="gtslifttons" size="5" type="text"> 吨重。
+      </p>
+      </td>
+      <td style="padding-left: 50px;">
+      大体上，2.25吨的重物就能压死普通人。
+    </tr>
+    <tr>
+      <td style="padding-left: 50px;">
+      <p style="line-height: 150%; "><strong>三围B/W/H：</strong><br>
+      <input name="bustfeet" size="5" type="text"> 米/
+      <input name="waistfeet" size="5" type="text"> 米/
+      <input name="hipsfeet" size="5" type="text"> 米</p>
+      <p style="line-height: 150%; ">
+      <strong>身体各部位的高度：</strong><br> 
+      头部离地
+      <input name="neckfeet" size="8" type="text">米<br>
+      胸部离地
+      <input name="breastfeet" size="8" type="text">米<br>
+      屁股离地
+      <input name="hipfeet" size="8" type="text">米<br>
+      股间离地
+      <input name="crotchfeet" size="8" type="text">米<br>
+      膝盖离地
+      <input name="kneefeet" size="8" type="text">米<br>
+      脚踝离地
+      <input name="anklefeet" size="8" type="text"> 米<br>
+      </p>
+      </td>
+      <td style="padding-left: 50px;">
+      <p style="margin:1 40; line-height: 200%; ">
+      <p style="text-decoration:underline; font-weight:bold;">
+      其它你也许有兴趣的尺寸数据：</p>
+      巨大少女的<strong>脚</strong>，全长<input name="footlengthfeet" size="5" type="text"> 米，宽 <input name="footwidthfeet" size="5" type="text"> 米<br>
+      巨大少女的<strong>手</strong>，全长<input name="handlengthfeet" size="5" type="text"> 米，宽 <input name="handwidthfeet" size="5" type="text"> 米<br>
+      巨大少女<strong>手臂</strong>，全长<input name="armlengthfeet" size="5" type="text"> 米（手掌长度不计）<br>
+      然后，少女的<strong>阴道</strong>深<input name="vaginalengthfeet" size="5" type="text">米<br>
+      <strong>胸部</strong>的相关数据分别是：<br>
+      纵长约<input name="breastheightfeet" size="3" type="text"> 米，横幅约 <input name="breastwidthfeet" size="3" type="text"> 米<br>
+      高度约<input name="breastdepthfeet" size="3" type="text"> 米，重量约 <input name="breastweighttons" size="8" type="text"> 吨
+      </p></td>
+    </tr>
+    <tr>
+    <td valign="left" style="padding-left: 50px;">
+    <p style="line-height: 150%; ">
+    <p style="font-weight:bold;">身高参考：</p>
+    3.5米高，屁股能埋住人的头（人类的两倍大）<br>
+    5.0米高，普通人看来约60厘米（四肢可插入）<br>
+    6.0 米高，体重就能達到2.5吨 （能压死人）<br>
+    6.5米高，普通人看来约45厘米（头可插入）<br>
+    10 米高，普通人看来约30厘米（半身可插入）<br>
+    18 米高，普通人看来约15厘米（全身可插入）<br>
+    19 米高，胸部重量即有2.5吨（胸部可压死人）<br>
+    24 米高，普通人相对重量为30克，体感重量为零<br>
+    42 米高，普通人看来约6厘米（隨便吞都无所谓）<br>
+    </p></td>
+    <td valign="left" style="padding-left: 50px;">
+    <p style="line-height: 150%; ">
+    <p style="text-decoration:underline; font-weight:bold;">
+    <strong>参考用高度表：</strong>
+    </p>
+    哈利法塔：828米<br>
+    深圳平安国际金融大厦：646米<br>
+	  上海环球金融中心：492米<br>
+	  江苏东方之门：301.8米<br>
+    伦敦汇丰大厦:210米<br>
+    哥斯拉：100 米 <br>
+    美国国会大厦圆顶：88米<br>
+	  普通四层公寓：14 米左右<br>
+    长颈鹿：4.8 米<br>
+    非洲象：4 米（7吨） </p></td>
+    </tr>
+  </tbody></table>
+</form>
+<p>
+ ©原载Giantessnight.com
+ <br>
+ ©简体化及本地化By Lcxzyr
+ <br>
+  All Ringts Reserved
+  <br>
+<br>
+<br>
+<br>
+<br>
+</p>
+</body></html>
