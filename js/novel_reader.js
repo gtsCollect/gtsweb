@@ -1,18 +1,5 @@
 // 引入推荐的库: epubjs 用于处理电子书内容, localforage 用于存储书签
 // 通过CDN或npm安装: epubjs, localforage
-
-// 加载txt文件
-function load_novel(url) {
-    // 使用fetch加载txt文件内容
-    fetch(url)
-        .then(response => response.text())
-        .then(text => {
-            // 将文本内容分割成页面
-            render_page(text);
-        })
-        .catch(error => console.error('加载小说文件失败:', error));
-}
-
 // 保存书签
 function save_bookmark() {
     // 获取当前阅读位置
@@ -54,41 +41,6 @@ function clear_bookmark() {
         });
 }
 
-// 渲染页面
-function render_page(content) {
-    // 如果内容未提供，则从某个地方获取
-    if (!content) {
-        // 这里可以是从服务器获取或从缓存中读取
-        return;
-    }
-
-    // 获取阅读器容器
-    const readerContainer = document.getElementById('reader-container');
-    if (!readerContainer) {
-        console.error('找不到阅读器容器');
-        return;
-    }
-
-    // 清空容器
-    readerContainer.innerHTML = '';
-    
-    // 创建内容容器
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'novel-content';
-    contentDiv.textContent = content;
-    readerContainer.appendChild(contentDiv);
-    
-    // 恢复之前的阅读位置（如果存在书签）
-    localforage.getItem('novel_bookmark').then(bookmark => {
-        if (bookmark && bookmark.position) {
-            // 滚动到之前的位置
-            window.scrollTo(0, bookmark.position);
-        }
-    }).catch(err => {
-        console.error('读取书签失败:', err);
-    });
-}
-
 // 获取当前位置的辅助函数
 function getCurrentPosition() {
     return window.pageYOffset || document.documentElement.scrollTop;
@@ -102,3 +54,9 @@ window.addEventListener('scroll', () => {
 });
 
 let scrollTimer;
+
+// 页面加载完成后初始化书签功能
+document.addEventListener('DOMContentLoaded', function() {
+    // 从页面内容中获取当前位置
+    load_bookmark();
+});

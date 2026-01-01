@@ -66,8 +66,6 @@
             background-color: #005a87;
         }
     </style>
-    <script src="js/localforage.min.js"></script>
-    
 </head>
 <body>
     <?php
@@ -92,17 +90,87 @@
         <button class="bookmarkButton" onclick="clear_bookmark()">清除书签</button>
     </div>
     
-    <div class="novel-content">
-        <?php
-        // 读取并显示文件内容
-        if (!empty($path) && file_exists($path)) {
-            $content = file_get_contents($path);
-            echo nl2br(htmlspecialchars($content));
-        } else {
-            echo "<p>无法读取小说内容</p>";
-        }
-        ?>
+    <div id="reader-container">
+        <div class="novel-content">
+            <?php
+            // 读取并显示文件内容
+            if (!empty($path) && file_exists($path)) {
+                $content = file_get_contents($path);
+                echo nl2br(htmlspecialchars($content));
+            } else {
+                echo "<p>无法读取小说内容</p>";
+            }
+            ?>
+        </div>
     </div>
-    <script src="js/novel_reader.js"></script>
+    <!-- <script src="js/novel_reader.js"></script> -->
+    <script src="js/localforage.min.js"></script>
+    <script>
+    // 引入推荐的库: epubjs 用于处理电子书内容, localforage 用于存储书签
+// 通过CDN或npm安装: epubjs, localforage
+// 保存书签
+function save_bookmark() {
+    // 获取当前阅读位置
+    const currentPos = getCurrentPosition();
+    // 获取当前小说路径
+    const novelPath = "<?php echo $path; ?>";
+    // 使用localForage保存书签到本地存储，以小说路径为键
+    localforage.setItem('novel_bookmark_' + novelPath, {
+        url: window.location.href,
+        position: currentPos,
+        timestamp: Date.now(),
+        novelName: "<?php echo htmlspecialchars($novelName); ?>"
+    }).then(() => {
+        console.log('书签已保存');
+    }).catch(err => {
+        console.error('保存书签失败:', err);
+    });
+}
+
+// 加载书签
+function load_bookmark() {
+    const novelPath = "<?php echo $path; ?>";
+    localforage.getItem('novel_bookmark_' + novelPath).then(bookmark => {
+        if (bookmark) {
+            // 如果书签是当前页面的，则滚动到之前的位置
+            window.scrollTo(0, bookmark.position || 0);
+        }
+    }).catch(err => {
+        console.error('读取书签失败:', err);
+    });
+}
+
+function clear_bookmark() {
+    const novelPath = "<?php echo $path; ?>";
+    // 清除当前小说的书签
+    localforage.removeItem('novel_bookmark_' + novelPath)
+        .then(() => {
+            console.log('书签已清除');
+        })
+        .catch(err => {
+            console.error('清除书签失败:', err);
+        });
+}
+
+// 获取当前位置的辅助函数
+function getCurrentPosition() {
+    return window.pageYOffset || document.documentElement.scrollTop;
+}
+
+// 添加滚动事件监听器，用于自动保存阅读进度
+window.addEventListener('scroll', () => {
+    // 可以设置节流来避免过于频繁的保存
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(save_bookmark, 1000); // 滚动停止1秒后保存
+});
+
+let scrollTimer;
+
+// 页面加载完成后初始化书签功能
+document.addEventListener('DOMContentLoaded', function() {
+    // 从页面内容中获取当前位置
+    load_bookmark();
+});
+    </script>
 </body>
 </html>

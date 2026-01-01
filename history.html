@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史记录</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .bookmark-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .bookmark-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .bookmark-info {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .bookmark-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .bookmark-button {
+            padding: 5px 10px;
+            background-color: #007cba;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .delete-button {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <h1>书签历史</h1>
+    <div id="bookmarks-container">
+        <p id="loading-message">加载中...</p>
+    </div>
+    
+    <script src="js/localforage.min.js"></script>
+    <script>
+        // 展示所有书签
+        function displayBookmarks() {
+            const container = document.getElementById('bookmarks-container');
+            container.innerHTML = '<p id="loading-message">加载中...</p>';
+            
+            // 获取所有书签
+            localforage.keys().then(function(keys) {
+                const bookmarkKeys = keys.filter(key => key.startsWith('novel_bookmark_'));
+                
+                if (bookmarkKeys.length === 0) {
+                    container.innerHTML = '<p>暂无书签记录</p>';
+                    return;
+                }
+                
+                let loadedCount = 0;
+                const bookmarks = [];
+                
+                bookmarkKeys.forEach(function(key) {
+                    localforage.getItem(key).then(function(value) {
+                        bookmarks.push({
+                            key: key,
+                            data: value
+                        });
+                        
+                        loadedCount++;
+                        if (loadedCount === bookmarkKeys.length) {
+                            renderBookmarks(bookmarks);
+                        }
+                    });
+                });
+                
+                if (bookmarkKeys.length === 0) {
+                    container.innerHTML = '<p>暂无书签记录</p>';
+                }
+            }).catch(function(err) {
+                console.log(err);
+                container.innerHTML = '<p>加载书签失败</p>';
+            });
+        }
+        
+        function renderBookmarks(bookmarks) {
+            const container = document.getElementById('bookmarks-container');
+            container.innerHTML = '';
+            
+            if (bookmarks.length === 0) {
+                container.innerHTML = '<p>暂无书签记录</p>';
+                return;
+            }
+            
+            // 按时间戳排序，最新的在前
+            bookmarks.sort((a, b) => b.data.timestamp - a.data.timestamp);
+            
+            bookmarks.forEach(function(item) {
+                const bookmark = item.data;
+                const key = item.key;
+                
+                const bookmarkDiv = document.createElement('div');
+                bookmarkDiv.className = 'bookmark-item';
+                
+                const date = new Date(bookmark.timestamp);
+                const formattedDate = date.toLocaleString();
+                
+                bookmarkDiv.innerHTML = `
+                    <div class="bookmark-title">${bookmark.novelName || '未知小说'}</div>
+                    <div class="bookmark-info">上次阅读: ${formattedDate}</div>
+                    <div class="bookmark-actions">
+                        <button class="bookmark-button" onclick="jumpToBookmark('${bookmark.url}')">继续阅读</button>
+                        <button class="delete-button" onclick="deleteBookmark('${key}')">删除书签</button>
+                    </div>
+                `;
+                
+                container.appendChild(bookmarkDiv);
+            });
+        }
+        
+        function jumpToBookmark(url) {
+            window.location.href = url;
+        }
+        
+        function deleteBookmark(key) {
+            if (confirm('确定要删除这个书签吗？')) {
+                localforage.removeItem(key).then(function() {
+                    displayBookmarks(); // 重新加载书签列表
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            }
+        }
+        
+        // 页面加载完成后显示书签
+        document.addEventListener('DOMContentLoaded', function() {
+            displayBookmarks();
+        });
+    </script>
+</body>
+</html>
