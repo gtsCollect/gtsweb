@@ -1,35 +1,3 @@
-<?php
-// viewer.php - 小说目录文件列表查看器
-if (!isset($_GET['novel']) || empty($_GET['novel'])) {
-    die('无效的小说名称');
-}
-
-$novelName = $_GET['novel'];
-$writer = $_GET['writer'];
-$novelDir = "小说/" . $novelName;
-
-// 安全检查，防止路径遍历攻击
-if (!is_dir($novelDir) || strpos($novelName, '..') !== false || strpos($novelName, '/') !== false) {
-    die('小说不存在');
-}
-
-// 获取小说目录下的所有文件
-$files = array();
-if (is_dir($novelDir)) {
-    $dirContents = scandir($novelDir);
-    foreach ($dirContents as $item) {
-        if ($item === '.' || $item === '..' || $item === "info.json") continue;
-        
-        $itemPath = $novelDir . '/' . $item;
-        if (is_file($itemPath)) {
-            $files[] = array(
-                'name' => $item,
-                'path' => $item
-            );
-        }
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -54,13 +22,13 @@ if (is_dir($novelDir)) {
             border-bottom: 1px solid #ddd;
         }
         
-        .novel-content {
+        /* .novel-content {
             background: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             min-height: 400px;
-        }
+        } */
         
         .back-link {
             display: inline-block;
@@ -72,58 +40,73 @@ if (is_dir($novelDir)) {
         .back-link:hover {
             text-decoration: underline;
         }
-        
-        .file-list {
-            list-style-type: none;
-            padding: 0;
+    </style>
+    <style>
+        .bookmarkControls{
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
         }
         
-        .file-list li {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        .bookmarkButton{
+            padding: 8px 12px;
+            background-color: #007cba;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
         }
         
-        .file-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .file-list a {
-            color: #007cba;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        
-        .file-list a:hover {
-            text-decoration: underline;
+        .bookmarkButton:hover{
+            background-color: #005a87;
         }
     </style>
+    <script src="js/localforage.min.js"></script>
+    
 </head>
 <body>
+    <?php
+    $novelName = $_GET['novel'];
+    $writer = $_GET['writer'] ?? '';
+    $path = $_GET['path'];
+    ?>
+    <!-- list应该在列表页显示，而不是阅读器页面 -->
     <div class="header">
-        <h1><?php echo htmlspecialchars($novelName); ?> - 文件列表 - 作者- <?php 
+        <h1><?php echo htmlspecialchars($novelName); ?>  - 作者- <?php 
         if(isset($writer))
         {
             echo htmlspecialchars($writer);
+        }
+        else
+        {
+            echo "未知作者";
         }
         ?></h1>
     </div>
     
     <a href="novel.php" class="back-link">&laquo; 返回小说列表</a>
     
-    <div class="novel-content">
-        <?php if (!empty($files)): ?>
-            <ul class="file-list">
-                <?php foreach ($files as $file): ?>
-                    <li>
-                        <a href="<?php echo htmlspecialchars("小说/" . rawurlencode($novelName) . "/" . rawurlencode($file['path'])); ?>">
-                            <?php echo htmlspecialchars($file['name']); ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>该小说目录下暂无文件。</p>
-        <?php endif; ?>
+    <div class="bookmarkControls">
+        <button class="bookmarkButton" onclick="save_bookmark()">保存书签</button>
+        <button class="bookmarkButton" onclick="load_bookmark()">加载书签</button>
+        <button class="bookmarkButton" onclick="clear_bookmark()">清除书签</button>
     </div>
+    
+    <div class="novel-content">
+        <!-- viewer.php应该只显示小说内容，而不是列表页 -->
+        <?php
+            if(isset($_GET['novel']))
+            {
+                // echo file_get_contents("小说/".$_GET['novel']);
+                echo file_get_contents($path);
+            }
+        ?>
+    </div>
+    <script src="js/novel_reader.js"></script>
 </body>
 </html>

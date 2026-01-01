@@ -23,6 +23,12 @@
         <li><a href="data/UnnamedAdventures/akane_background.rpy">akane_background.rpy</a></li>
     </ol>
     <?php
+    function get_info($file)
+    {
+        $json = file_get_contents($infoFile);
+        $infoData = json_decode($json,true);
+        return $infoData;
+    }
     // 一个遍历小说文件夹每个文件夹下的所有文件的函数
     function gen_novel_list_2($dir)
     {
@@ -39,28 +45,26 @@
                     if (is_dir($filePath)) {
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
                         $encodedFile = rawurlencode($file);
-                        // 指向统一的小说查看器，传递小说名称参数
                         $infoFile = $filePath . "/info.json";
-                        if(is_file($infoFile))
+                        if(file_exists($infoFile))
                         {
                             $json = file_get_contents($infoFile);
                             $infoData = json_decode($json,true);
                             $writer = $infoData['writer'];
-                            $viewerPath = 'viewer.php?novel=' . $encodedFile . '&writer=' . rawurlencode($writer) ;
+                            $url = 'list.php?novel=' . $encodedFile . '&writer=' . rawurlencode($writer) .'&path=' . rawurlencode($filePath) . $encodedFile ;
+                            echo "<li><a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($file) . "</a></li>";
                         }
                         else{
-                            $viewerPath = 'viewer.php?novel=' . $encodedFile;
+                            $url = 'list.php?novel=' . $encodedFile .'&path=' . rawurlencode($filePath) . rawurlencode($filePath) . $encodedFile ;
+                            echo "<li><a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($file) . "</a></li>";
                         }
-                        // 输出HTML列表项
-                        echo "<li><a href='" . htmlspecialchars($viewerPath) . "'>" . htmlspecialchars($file) . "</a></li>";
                     }
                     else{
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
                         $encodedFile = rawurlencode($file);
                         $encodedPath = $encodedDir . '/' . $encodedFile;
-                        
-                        // 输出HTML列表项
-                        echo "<li><a href='" . htmlspecialchars($encodedPath) . "'>" . htmlspecialchars($file) . "</a></li>";
+                        $url = 'viewer.php?novel=' . $encodedFile .'&path=' . rawurlencode($filePath);
+                        echo "<li><a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($file) . "</a></li>";
                     }
                 }
             }
