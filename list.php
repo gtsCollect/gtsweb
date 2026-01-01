@@ -109,11 +109,8 @@ if (is_dir($novelDir)) {
             <ul>
                 <?php foreach ($files as $file): ?>
                     <li>
-                        <a href="<?php echo htmlspecialchars("小说/" . rawurlencode($novelName) . "/" . rawurlencode($file['path'])); ?>">
-                            <?php
-                                $path = $_GET['path'];
-                                echo "<a href='viewer.php?path=$path&novel=" . rawurlencode($file['path']) . "'>" . htmlspecialchars($file['name']) . "</a>"
-                            ?>
+                        <a href="viewer.php?path=<?php echo rawurlencode($novelDir . '/' . $file['path']); ?>">
+                            <?php echo htmlspecialchars($file['name']); ?>
                         </a>
                     </li>
                 <?php endforeach; ?>

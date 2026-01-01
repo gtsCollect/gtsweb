@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($novelName); ?> - 文件列表</title>
+    <title><?php echo isset($_GET['novel']) ? htmlspecialchars($_GET['novel']) : '小说阅读器'; ?> - 小说阅读器</title>
     <style>
         body {
             font-family: "Microsoft YaHei", Arial, sans-serif;
@@ -71,22 +71,17 @@
 </head>
 <body>
     <?php
-    $novelName = $_GET['novel'];
-    $writer = $_GET['writer'] ?? '';
-    $path = $_GET['path'];
+    // 从path参数中获取文件路径
+    $path = $_GET['path'] ?? '';
+    $novelName = basename($path, '.txt'); // 从路径中获取文件名（假设是.txt文件）
+    
+    // 安全检查，防止路径遍历攻击
+    if (strpos($path, '..') !== false || !file_exists($path)) {
+        die('文件不存在或路径无效');
+    }
     ?>
-    <!-- list应该在列表页显示，而不是阅读器页面 -->
     <div class="header">
-        <h1><?php echo htmlspecialchars($novelName); ?>  - 作者- <?php 
-        if(isset($writer))
-        {
-            echo htmlspecialchars($writer);
-        }
-        else
-        {
-            echo "未知作者";
-        }
-        ?></h1>
+        <h1><?php echo htmlspecialchars($novelName); ?></h1>
     </div>
     
     <a href="novel.php" class="back-link">&laquo; 返回小说列表</a>
@@ -98,13 +93,14 @@
     </div>
     
     <div class="novel-content">
-        <!-- viewer.php应该只显示小说内容，而不是列表页 -->
         <?php
-            if(isset($_GET['novel']))
-            {
-                // echo file_get_contents("小说/".$_GET['novel']);
-                echo file_get_contents($path);
-            }
+        // 读取并显示文件内容
+        if (!empty($path) && file_exists($path)) {
+            $content = file_get_contents($path);
+            echo nl2br(htmlspecialchars($content));
+        } else {
+            echo "<p>无法读取小说内容</p>";
+        }
         ?>
     </div>
     <script src="js/novel_reader.js"></script>

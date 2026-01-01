@@ -63,7 +63,7 @@
                         $encodedDir = implode('/', array_map('rawurlencode', explode('/', $dir)));
                         $encodedFile = rawurlencode($file);
                         $encodedPath = $encodedDir . '/' . $encodedFile;
-                        $url = 'viewer.php?novel=' . $encodedFile .'&path=' . rawurlencode($filePath);
+                        $url = 'viewer.php?path=' . rawurlencode($filePath);
                         echo "<li><a href='" . htmlspecialchars($url) . "'>" . htmlspecialchars($file) . "</a></li>";
                     }
                 }
