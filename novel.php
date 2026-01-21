@@ -12,6 +12,9 @@
     <p>加密的文章需要使用 <a href="https://www.sojson.com/encrypt.html#google_vignette">这个网站</a>解密（复制文章内容搞进去，再复制密钥进行解密）这是为了防审查</p>
     <p>注：一间昏暗的密室内 一名巨大的魔族少女双腿敞开 这篇小说需要使用解密查看 (1),加密方法（AES）密钥S6Cs5vU3TAJdPG5c6yD4</p>
     <ol>
+        <li><a href="小说/147文合集.html">147文合集</a></li>
+        <li><a href="小说/203文 (1).html">203文 (1)</a></li>
+        <li><a href="https://www.kzwr.com/file/d7bfbbcb">3500篇合集-解压密码catgril</a>提取码cQhgAH</li>
     <?php
     // 使用gen_novel_list2函数生成小说列表
     gen_novel_list_2("小说");
