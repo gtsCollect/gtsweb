@@ -15,6 +15,7 @@
         <li><a href="小说/147文合集.html">147文合集</a></li>
         <li><a href="小说/203文 (1).html">203文 (1)</a></li>
         <li><a href="https://www.kzwr.com/file/d7bfbbcb">3500篇合集-解压密码catgril</a>提取码cQhgAH</li>
+        <li><a href="https://liu-c.codeberg.page/">她掌中的我</a></li>
     <?php
     // 使用gen_novel_list2函数生成小说列表
     gen_novel_list_2("小说");
